@@ -1,0 +1,49 @@
+[project]
+name = "tinygpt"
+version = "0.1.0"
+description = "A GPT trained from scratch, readable end to end: byte-level BPE, explicit attention, KV-cache generation."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "Rohan Reddy Jakkam", email = "86797493+rohanreddy79@users.noreply.github.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "matplotlib>=3.9",
+    "numpy>=2.0",
+    "pyyaml>=6.0",
+    "torch>=2.4",
+    "typer>=0.12",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.scripts]
+tinygpt = "tinygpt.cli:app"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.28,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "W", "N", "SIM"]
+ignore = ["N806", "N803", "N812"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+filterwarnings = ["error::DeprecationWarning:tinygpt.*"]
