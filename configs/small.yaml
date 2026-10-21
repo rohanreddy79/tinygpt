@@ -1,0 +1,31 @@
+# tinygpt "small" run: ~10M params. GPU recommended; this config has NOT been run on the
+# 8 GB CPU-only machine the README numbers come from. Prepare data with
+#   tinygpt prepare --vocab-size 2048
+# then
+#   tinygpt train --config configs/small.yaml --device auto
+model:
+  vocab_size: 2048
+  block_size: 256
+  n_layer: 6
+  n_head: 6
+  n_embd: 384
+  dropout: 0.1
+  bias: false
+  sdpa: true
+train:
+  data_dir: data
+  out_dir: out/small
+  device: auto
+  seed: 1337
+  batch_size: 64
+  max_steps: 5000
+  lr: 6.0e-4
+  min_lr: 6.0e-5
+  warmup_steps: 200
+  weight_decay: 0.1
+  beta1: 0.9
+  beta2: 0.95
+  grad_clip: 1.0
+  eval_interval: 250
+  eval_iters: 20
+  log_interval: 50
